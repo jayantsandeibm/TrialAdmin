@@ -1,0 +1,17 @@
+<!--
+  Purpose: Component to create Account record
+-->
+<aura:component implements="flexipage:availableForRecordHome,force:appHostable,lightning:actionOverride,force:hasRecordId">
+    <aura:attribute name="acc" type="Account" />
+    <aura:attribute name="recordId" type="String" />
+    <div class="slds-p-bottom_large slds-p-left_large" style="width:600px">
+        <lightning:recordEditForm aura:id="recordEditForm"
+                                  recordTypeId="{!v.acc}"
+                                  objectApiName="Account"
+                                  onsuccess="{!c.onSuccess}">
+            <lightning:messages />
+            <lightning:inputField fieldName="Name" />
+            <lightning:button aura:id="submit" type="submit" label="Create" class="slds-m-top_medium" />
+        </lightning:recordEditForm>
+    </div>
+</aura:component>

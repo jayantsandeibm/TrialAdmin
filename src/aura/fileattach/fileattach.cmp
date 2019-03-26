@@ -1,0 +1,24 @@
+<aura:component controller="controllerCreateFile" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+	 <aura:attribute name="parentId" type="Id" default="" />
+    <aura:attribute name="accountName" type="String" default=""/>
+   <aura:attribute name="fileName" type="String" default="select file here.." />
+    <aura:attribute name="txtResponse" type="String" default="Max size 4.5 MB" />
+    <aura:attribute name="showLoadingSpinner" type="boolean" default="false" />
+ 
+    
+	<div class="slds-text-body_small slds-text-color_success">{!v.txtResponse}</div> 
+    <lightning:input required="true" aura:id="AccName" value="{!v.accountName}" label="Account Name" />
+   	<lightning:input aura:id="fileId" onchange="{!c.handleFilesChange}" type="file" name="file" label="Attach file to this record.." multiple="false"/>
+   	<div class="slds-text-body_small slds-text-color_error">{!v.fileName}</div>
+ 	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+	
+   <aura:if isTrue="{!v.showLoadingSpinner}">
+      <div class="slds-text-body_small slds-text-color_error">uploading attachment :) 
+         <img src="/auraFW/resources/aura/images/spinner.gif" class="spinner-img" alt="Loading"/>'
+      </div>
+   </aura:if>
+   
+ <br/>
+   <button class="slds-button slds-button_brand"  onclick="{!c.doSave}">Create Account</button>
+    
+</aura:component>

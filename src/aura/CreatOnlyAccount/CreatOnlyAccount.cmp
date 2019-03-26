@@ -1,0 +1,40 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+	<aura:attribute name="disabled" type="Boolean" default="false" />
+    <aura:attribute name="defAccName" type="String" default="" />
+    <aura:attribute name="saved" type="Boolean" default="false" />
+    <aura:attribute name="showSpinner" type="Boolean" default="false" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="eMessage" type="String" />
+    <div class="slds-box slds-theme--shade"> 
+    <aura:if isTrue="{!v.showSpinner}">
+        <lightning:spinner />
+    </aura:if>
+    <aura:if isTrue="{!!v.saved}">
+       <lightning:recordEditForm
+            aura:id="myRecordForm"                     
+            onload="{!c.handleLoad}"
+            onsubmit="{!c.handleSubmit}"
+            onsuccess="{!c.handleSuccess}"
+            objectApiName="Account"
+            recordTypeId ="0125A000000zxD8QAI">
+       
+            <!-- the messages component is for error messages -->
+            <lightning:messages />
+
+            <lightning:inputField fieldName="Name" aura:id="AccName" value="{!v.defAccName}"/>
+            <lightning:inputField fieldName="AccountSource" aura:id="AccountSource"/>
+            <lightning:inputField fieldName="Type" aura:id="Type"/>
+            <lightning:inputField fieldName="Industry" aura:id="Industry"/>
+            <lightning:inputField fieldName="Description" aura:id="Description"/>
+            <lightning:inputField fieldName="Phone" aura:id="Phone"/>
+            <div class="slds-m-top_medium">
+                <lightning:button disabled="{!v.disabled}" variant="brand" type="submit" name="save" label="Save" />
+            </div>
+        </lightning:recordEditForm>
+        {!v.eMessage}
+        <aura:set attribute="else">
+            <p>{!v.eMessage}</p>
+        </aura:set>
+    </aura:if>
+    </div>
+</aura:component>
